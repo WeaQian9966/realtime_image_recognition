@@ -46,7 +46,8 @@ def analyze_frame_with_ollama(frame):
         is_analyzing = False
 
 # --- 主循环 ---
-cap = cv2.VideoCapture(0)
+# 将 0 改为你刚才测出来的数字 (例如 2)
+cap = cv2.VideoCapture(1, cv2.CAP_AVFOUNDATION)
 
 # 设置每隔多少帧触发一次 LLM 分析 (例如每 5 秒触发一次)
 # 或者你可以改为基于事件触发 (例如: 检测到 'person' 时触发)
@@ -86,7 +87,7 @@ while True:
                 cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
     
     # 显示 LLM 的分析结果 (可能延迟较高，但不会卡住画面)
-    cv2.putText(annotated_frame, f"LLM: {current_frame_analysis[:50]}...", (10, 60), 
+    cv2.putText(annotated_frame, f"LLM: {current_frame_analysis}", (10, 60), 
                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 255), 2)
 
     cv2.imshow('YOLO + Ollama Hybrid', annotated_frame)
